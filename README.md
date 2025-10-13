@@ -1,2 +1,1 @@
-# MY-STUDY-MATERIAL
-my codes and errors
+Merged interval and https://cses.fi/problemset/task/1619
