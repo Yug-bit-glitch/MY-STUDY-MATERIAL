@@ -23,3 +23,32 @@
         printf("%d",nums[i]);
     }
 }
+
+
+
+//kadane algorithm used to find maximum subarray sum but dont apply sorting 
+#include<stdio.h>
+int main(){
+int n;
+scanf("%d\n",&n);
+long long a[n];
+
+
+for(int i=0;i<n;i++){
+    scanf("%lld",&a[i]);
+}
+long long curr=a[0];
+long long max=a[0];
+for(int i=1;i<n;i++){
+   if(curr<0){
+    curr=a[i];
+   }else{
+    curr+=a[i];
+   }
+   if(curr>max){
+    max=curr;
+   }
+}
+printf("%lld\n",max);
+return 0;
+}
