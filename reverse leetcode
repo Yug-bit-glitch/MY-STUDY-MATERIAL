@@ -1,0 +1,62 @@
+int merge(int arr[], int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+    int l[n1];
+    int r[n2];
+    int count = 0;
+    
+    // Copy data to temporary arrays
+    for (int i = 0; i < n1; i++) {
+        l[i] = arr[left + i];
+    }
+    for (int j = 0; j < n2; j++) {
+        r[j] = arr[mid + 1 + j];
+    }
+    
+    // Count reverse pairs where arr[i] > 2 * arr[j]
+    int j = 0;
+    for (int i = 0; i < n1; i++) {
+        while (j < n2 && l[i] > 2LL * r[j]) {
+            j++;
+        }
+        count += j;
+    }
+    
+    // Merge the two sorted halves
+    int i = 0;
+    j = 0;
+    int k = left;
+    while (i < n1 && j < n2) {
+        if (l[i] <= r[j]) {
+            arr[k++] = l[i++];
+        } else {
+            arr[k++] = r[j++];
+        }
+    }
+    
+    // Copy remaining elements
+    while (i < n1) {
+        arr[k++] = l[i++];
+    }
+    while (j < n2) {
+        arr[k++] = r[j++];
+    }
+    
+    return count;
+}
+
+int mergesort(int arr[], int left, int right) {
+    int count = 0;
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        count += mergesort(arr, left, mid);
+        count += mergesort(arr, mid + 1, right);
+        count += merge(arr, left, mid, right);
+    }
+    return count;
+}
+
+int reversePairs(int* nums, int numsSize) {
+    if (numsSize <= 1) return 0;
+    return mergesort(nums, 0, numsSize - 1);
+}
