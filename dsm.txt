@@ -1,0 +1,56 @@
+To design the four-bit counter that cycles through prime numbers, we will follow a systematic approach involving state tables, Karnaugh maps for simplification, and deriving the logic for the D flip-flop inputs.
+
+1. Identifying States and Sequence
+
+First, we identify the prime numbers that can be represented by a 4-bit binary number (from 0 to 15). These primes are 2, 3, 5, 7, 11, and 13.
+
+The counter is designed to follow this sequence:
+2 → 3 → 5 → 7 → 11 → 13 → 2 (and repeats)
+
+The initial state of the counter is given as 2 (binary 0010).
+
+2. State Table Construction
+
+Next, we create a state table that shows the transition from the "Present State" (the current output of the counter, denoted by Q₃Q₂Q₁Q₀) to the "Next State" (the desired subsequent output, denoted by Q₃⁺Q₂⁺Q₁⁺Q₀⁺). The next state values will serve as the inputs (D₃D₂D₁D₀) for the D flip-flops.
+
+Decimal (Present)	Present State (Q₃Q₂Q₁Q₀)	Next State (Q₃⁺Q₂⁺Q₁⁺Q₀⁺) / (D₃D₂D₁D₀)	Decimal (Next)
+2	0010	0011	3
+3	0011	0101	5
+5	0101	0111	7
+7	0111	1011	11
+11	1011	1101	13
+13	1101	0010	2
+
+The states corresponding to decimal values 0, 1, 4, 6, 8, 9, 10, 12, 14, and 15 are unused. These will be treated as "don't care" (X) conditions during simplification, which allows for more optimal logic circuits.
+
+3. Deriving Expressions for Flip-Flop Inputs
+
+We use 4-variable Karnaugh maps (K-maps) to derive the simplified Boolean expressions for each D flip-flop input (D₃, D₂, D₁, D₀) in terms of the present state variables (Q₃, Q₂, Q₁, Q₀).
+
+Simplified Boolean Expressions:
+
+For D₃:
+D₃ = Q₂Q₁Q₀ + Q₃Q₀
+
+For D₂:
+D₂ = Q₂'Q₁Q₀ + Q₁'Q₀Q₃' + Q₂Q₁'Q₀'
+
+For D₁:
+D₁ = Q₀'
+
+For D₀:
+D₀ = Q₃'Q₂' + Q₁
+
+4. Circuit Implementation
+
+The final step is to implement the circuit. This involves:
+
+Four D flip-flops, one for each bit of the counter (Q₀ to Q₃).
+
+A common clock signal connected to each flip-flop to ensure synchronous operation.
+
+Combinational logic gates (AND, OR, NOT) based on the simplified expressions derived above. The outputs of this logic are connected to the D inputs of the respective flip-flops.
+
+The circuit is assumed to have a reset mechanism that forces the initial state to 0010.
+
+The output of the counter is taken from the Q outputs of the four flip-flops (Q₃Q₂Q₁Q₀). With each clock pulse, the counter will transition to the next prime number in the specified sequence.
