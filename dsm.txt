@@ -54,3 +54,64 @@ Combinational logic gates (AND, OR, NOT) based on the simplified expressions der
 The circuit is assumed to have a reset mechanism that forces the initial state to 0010.
 
 The output of the counter is taken from the Q outputs of the four flip-flops (Q₃Q₂Q₁Q₀). With each clock pulse, the counter will transition to the next prime number in the specified sequence.
+Of course. Here is a concise way to solve each part of the problem.
+
+(a) Draw the logic diagram of the circuit.
+
+To draw the diagram quickly, directly translate each equation into its gate representation:
+
+Flip-Flop A:
+
+J_A = Bx + B'y' requires two AND gates and one OR gate.
+
+K_A = B'xy' requires a three-input AND gate.
+
+Flip-Flop B:
+
+J_B = A'x requires one AND gate.
+
+K_B = A + xy' requires one AND gate and one OR gate.
+
+Output z:
+
+z = Ax'y' + Bx'y requires two three-input AND gates and one OR gate.
+
+Connect the outputs of these gates to the corresponding J, K, and z terminals. The inputs to these gates will come from the main inputs x and y, and the flip-flop outputs A and B (and their complements A' and B').
+
+(b) Tabulate the state table.
+
+To create the state table efficiently, calculate the J and K values and then determine the next state for each present state and input combination. The next state of a JK flip-flop is given by Q(t+1) = JQ' + K'Q.
+
+Present State	Inputs	Flip-Flop Inputs	Next State	Output
+A	B	x	y	Jₐ Kₐ
+0	0	0	0	1 0
+0	0	0	1	0 0
+0	0	1	0	0 0
+0	0	1	1	0 0
+0	1	0	0	0 0
+0	1	0	1	0 0
+0	1	1	0	1 0
+0	1	1	1	1 0
+1	0	0	0	1 0
+1	0	0	1	0 0
+1	0	1	0	0 1
+1	0	1	1	0 0
+1	1	0	0	0 0
+1	1	0	1	0 0
+1	1	1	0	1 0
+1	1	1	1	1 0
+(c) Derive the state equations for A and B.
+
+The shortest way is to use the characteristic equation for a JK flip-flop, Q(t+1) = JQ' + K'Q, and substitute the given expressions for J and K directly.
+
+For Flip-Flop A:
+A(t+1) = J_A A' + K_A' A
+A(t+1) = (Bx + B'y')A' + (B'xy')'A
+A(t+1) = A'Bx + A'B'y' + (B + x' + y)A
+A(t+1) = A'Bx + A'B'y' + AB + Ax' + Ay
+
+For Flip-Flop B:
+B(t+1) = J_B B' + K_B' B
+B(t+1) = (A'x)B' + (A + xy')'B
+B(t+1) = A'B'x + (A'(x' + y))B
+B(t+1) = A'B'x + A'Bx' + A'By
