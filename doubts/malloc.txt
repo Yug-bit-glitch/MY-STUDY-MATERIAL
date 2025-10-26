@@ -1,0 +1,7 @@
+Question 6: (2 marks) What is the return type of malloc()?
+(A) void *
+(B) Pointer of allocated memory type
+(C) void **
+(D) int *
+Solution: A.
+The malloc() function in C is used for dynamic memory allocation. It allocates a block of memory of the speci- fied size and returns a pointer to the beginning of that block. The return type of malloc() is void *. This is a pointer to void, which is a generic pointer type in C. The reason malloc() returns void * is for flexibility. It can allocate memory for any data type, and the void can be cast to the appropriate pointer type by the programmer.
