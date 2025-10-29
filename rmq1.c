@@ -8,8 +8,8 @@
 int main() {
     int n, q;
     scanf("%d %d", &n, &q);
-    int A[n];
-    for (int i = 0; i < n; ++i)
+    int A[n+1];
+    for (int i = 1; i < n+1; ++i)
         scanf("%d", &A[i]);
 
     while (q--) {
